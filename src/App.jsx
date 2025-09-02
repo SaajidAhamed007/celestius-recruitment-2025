@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Recruitment from "./pages/recruitment";
+import Recruitment from "./pages/Recruitment";
 import ThankYou from "./pages/ThankYou";
 import { Toaster } from "react-hot-toast";
 
