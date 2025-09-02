@@ -1,0 +1,28 @@
+.futuristic-bg {
+  position: relative;
+  overflow: hidden;
+}
+.futuristic-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #0ff, #00f, #f0f, #ff0, #0ff);
+  background-size: 400% 400%;
+  filter: blur(150px);
+  animation: gradientMove 15s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.futuristic-bg > form {
+  position: relative;
+  z-index: 10;
+}
