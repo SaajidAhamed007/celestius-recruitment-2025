@@ -38,13 +38,11 @@ const Recruitment = () => {
   console.log(formData)
   
   try {
-    // Add document to "recruitment" collection
     const sanitizedData = Object.fromEntries(
-  Object.entries(formData).map(([key, value]) => [key, value || ""])
-);
-await addDoc(collection(db, "recruitment"), sanitizedData);
-alert("dkfjwf")
-navigate("/thank-you");
+        Object.entries(formData).map(([key, value]) => [key, value || ""])
+    );
+    await addDoc(collection(db, "recruitment"), sanitizedData);
+    navigate("/thank-you");
 
   } catch (err) {
     console.error(err);
@@ -145,8 +143,7 @@ navigate("/thank-you");
 </div>
 
 
-        <div className="flex flex-col md:flex-row justify-between gap-6">
-  {/* Tech Roles */}
+<div className="flex flex-col md:flex-row justify-between gap-6">
   <div className="flex flex-col space-y-3 flex-1">
     <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">
       Tech Roles
@@ -173,7 +170,6 @@ navigate("/thank-you");
     ))}
   </div>
 
-  {/* Non-Tech Roles */}
   <div className="flex flex-col space-y-3 flex-1">
     <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">
       Non-Tech Roles
