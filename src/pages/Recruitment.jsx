@@ -4,10 +4,10 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 
-const techRoles = ["Frontend Developer", "Backend Developer" , "AI Developer", "UI/UX Designer"];
-const nonTechRoles = ["Video Editor", "Content Writer", "Marketing", "Media",];
+const techRoles = ["Frontend Developer", "Backend Developer" , "UI/UX Designer"];
+const nonTechRoles = ["Video Editor","Media", "Content Writer", "Marketing", "Social Media Handling"];
 const years = ["1st Year", "2nd Year", "3rd Year"];
-const depts = ["CSE","IT","AI DS","AI ML","Cyber Security", "ECE","MECH", "CIVIL", "EEE","VLSI","ACT"];
+const depts = ["CSE","IT","AI DS","AI ML","Cyber Security", "CSBS" ,"ECE","MECH", "CIVIL", "EEE","VLSI","ACT","BME"];
 
 const Recruitment = () => {
 
@@ -22,6 +22,7 @@ const Recruitment = () => {
     role: "",
     github: "",
     resume: "",
+    mode:"",
     description: "",
   });
 
@@ -139,6 +140,49 @@ const Recruitment = () => {
         {dept}
       </label>
     ))}
+  </div>
+</div>
+
+<div className="flex flex-col space-y-3">
+  <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">
+    Status
+  </label>
+  <div className="flex gap-4 flex-wrap">
+      <label
+        className={`cursor-pointer px-4 py-2 rounded-full border border-yellow-500/50 transition-colors duration-200 shadow-[0_0_5px_rgba(255,255,0,0.3)]
+          ${formData.mode === "day-scholar"
+            ? "bg-yellow-500 border-yellow-200 shadow-[0_0_5px_rgba(255,255,0,0.6)] text-black font-semibold" 
+            : "text-yellow-200 hover:bg-yellow-600/20"}`}
+      >
+        <input
+          type="radio"
+          name="mode"
+          value={"day-scholar"}
+          checked={formData.mode === "day-scholar"}
+          onChange={handleChange}
+          className="hidden"
+          required
+        />
+        {"Day-Scholar"}
+      </label>
+
+      <label
+        className={`cursor-pointer px-4 py-2 rounded-full border border-yellow-500/50 transition-colors duration-200 shadow-[0_0_5px_rgba(255,255,0,0.3)]
+          ${formData.mode === "hosteller"
+            ? "bg-yellow-500 border-yellow-200 shadow-[0_0_5px_rgba(255,255,0,0.6)] text-black font-semibold" 
+            : "text-yellow-200 hover:bg-yellow-600/20"}`}
+      >
+        <input
+          type="radio"
+          name="mode"
+          value={"hosteller"}
+          checked={formData.mode === "hosteller"}
+          onChange={handleChange}
+          className="hidden"
+          required
+        />
+        {"Hosteller"}
+      </label>
   </div>
 </div>
 
