@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { Loader2 } from "lucide-react"
 
 const techRoles = ["Frontend Developer", "Backend Developer", "UI/UX Designer"];
 const nonTechRoles = ["Video Editor", "Media", "Content Writer", "Marketing", "Events & Promotion"];
 const years = ["1st Year", "2nd Year", "3rd Year"];
-const depts = ["CSE","IT","AI DS","AI ML","Cyber Security","CSBS","ECE","MECH","CIVIL","EEE","VLSI","ACT","BME","MCT"];
+const depts = ["CSE","IT","AI DS","AI ML","Cyber Security","CSBS","ECE","MECH","CIVIL","EEE","VLSI","ACT","BME"];
 
 const Recruitment = () => {
   const navigate = useNavigate();
@@ -35,17 +35,43 @@ const Recruitment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
-    
+    setIsLoading(true);
+
     try {
       if (!formData.name || !formData.email || !formData.contact || !formData.dept || !formData.year || !formData.role || !formData.description) {
         toast.error("Please fill all the fields!");
+        setIsLoading(false);
         return;
       }
+
+      const emailQuery = query(
+        collection(db, "recruitment"),
+        where("email", "==", formData.email)
+      );
+      const emailSnapshot = await getDocs(emailQuery);
+      if (!emailSnapshot.empty) {
+        toast.error("This email is already registered!");
+        setIsLoading(false);
+        return;
+      }
+
+      const contactQuery = query(
+        collection(db, "recruitment"),
+        where("contact", "==", formData.contact)
+      );
+      const contactSnapshot = await getDocs(contactQuery);
+      if (!contactSnapshot.empty) {
+        toast.error("This contact number is already registered!");
+        setIsLoading(false);
+        return;
+      }
+
       const sanitizedData = Object.fromEntries(
         Object.entries(formData).map(([key, value]) => [key, value || ""])
       );
+
       await addDoc(collection(db, "recruitment"), sanitizedData);
+      toast.success("Application submitted successfully!");
       navigate("/thank-you");
     } catch (err) {
       console.error(err);
@@ -68,7 +94,7 @@ const Recruitment = () => {
           We are <span className="text-yellow-400 animate-bounce inline-block drop-shadow-[0_0_1px_rgba(255,255,0,0.7)]">Hiring!</span>
         </h1>
 
-        {["name", "email", "contact"].map((field) => {
+        {["name", "email", "contact",].map((field) => {
           const labels = { name: "Full Name", email: "Email Address", contact: "Contact Number" };
           const placeholders = { name: "Enter your full name", email: "Enter your email", contact: "Enter your contact number" };
           const types = { name: "text", email: "email", contact: "tel" };
@@ -86,6 +112,8 @@ const Recruitment = () => {
             </div>
           );
         })}
+
+        
 
         <div className="flex flex-col space-y-3">
           <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Year of Study</label>
