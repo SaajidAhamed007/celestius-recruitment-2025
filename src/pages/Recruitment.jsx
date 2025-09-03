@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
+import { Loader2 } from "lucide-react"
 
 const techRoles = ["Frontend Developer", "Backend Developer", "UI/UX Designer"];
 const nonTechRoles = ["Video Editor", "Media", "Content Writer", "Marketing", "Social Media Handling"];
@@ -12,6 +13,7 @@ const depts = ["CSE","IT","AI DS","AI ML","Cyber Security","CSBS","ECE","MECH","
 const Recruitment = () => {
   const navigate = useNavigate();
 
+  const [isLoading,setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,7 +35,13 @@ const Recruitment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
+    
     try {
+      if (!formData.name || !formData.email || !formData.contact || !formData.dept || !formData.year || !formData.role || !formData.description) {
+        toast.error("Please fill all the fields!");
+        return;
+      }
       const sanitizedData = Object.fromEntries(
         Object.entries(formData).map(([key, value]) => [key, value || ""])
       );
@@ -42,6 +50,8 @@ const Recruitment = () => {
     } catch (err) {
       console.error(err);
       toast.error("Error submitting form");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,7 +83,6 @@ const Recruitment = () => {
                 value={formData[field]}
                 onChange={handleChange}
                 className="w-full p-3 rounded-xl border border-yellow-500/30 bg-black/30 text-white placeholder-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-black/40 transition-colors duration-200 shadow-[0_0_5px_rgba(255,255,0,0.4)]"
-                required
               />
             </div>
           );
@@ -90,7 +99,7 @@ const Recruitment = () => {
                   formData.year === yr ? "bg-yellow-500 border-yellow-200 text-black font-semibold" : "text-yellow-200 hover:bg-yellow-600/20"
                 }`}
               >
-                <input type="radio" name="year" value={yr} checked={formData.year === yr} onChange={handleChange} className="hidden" required />
+                <input type="radio" name="year" value={yr} checked={formData.year === yr} onChange={handleChange} className="hidden" />
                 {yr}
               </label>
             ))}
@@ -108,7 +117,7 @@ const Recruitment = () => {
                   formData.dept === dept ? "bg-yellow-500 border-yellow-200 text-black font-semibold" : "text-yellow-200 hover:bg-yellow-600/20"
                 }`}
               >
-                <input type="radio" name="dept" value={dept} checked={formData.dept === dept} onChange={handleChange} className="hidden" required />
+                <input type="radio" name="dept" value={dept} checked={formData.dept === dept} onChange={handleChange} className="hidden" />
                 {dept}
               </label>
             ))}
@@ -126,7 +135,7 @@ const Recruitment = () => {
                   formData.mode === mode ? "bg-yellow-500 border-yellow-200 text-black font-semibold" : "text-yellow-200 hover:bg-yellow-600/20"
                 }`}
               >
-                <input type="radio" name="mode" value={mode} checked={formData.mode === mode} onChange={handleChange} className="hidden" required />
+                <input type="radio" name="mode" value={mode} checked={formData.mode === mode} onChange={handleChange} className="hidden" />
                 {mode === "day-scholar" ? "Day-Scholar" : "Hosteller"}
               </label>
             ))}
@@ -164,7 +173,7 @@ const Recruitment = () => {
                   formData.role === role ? "bg-yellow-500 border-yellow-200 text-black font-semibold " : "text-yellow-200 hover:bg-yellow-600/20 font-semibold"
                 }`}
               >
-                <input type="radio" name="role" value={role} checked={formData.role === role} onChange={handleChange} className="hidden" required />
+                <input type="radio" name="role" value={role} checked={formData.role === role} onChange={handleChange} className="hidden" />
                 {role}
               </label>
             ))}
@@ -209,7 +218,6 @@ const Recruitment = () => {
             onChange={handleChange}
             rows="4"
             className="w-full p-3 rounded-xl border border-yellow-500/30 bg-black/30 placeholder-yellow-200 text-amber-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-black/40 transition-colors duration-200"
-            required
           />
         </div>
 
@@ -217,7 +225,7 @@ const Recruitment = () => {
           type="submit"
           className="w-full bg-yellow-500 text-white py-3 rounded-xl font-semibold hover:bg-yellow-600 transition-colors duration-200 shadow-[0_0_5px_rgba(255,255,0,0.5)]"
         >
-          Submit Application
+          {isLoading ? <Loader2 className="animate-spin" /> : "Submit Application"}
         </button>
       </form>
     </div>
