@@ -223,10 +223,14 @@ const Recruitment = () => {
 
         <button
           type="submit"
-          className="w-full bg-yellow-500 text-white py-3 rounded-xl font-semibold hover:bg-yellow-600 transition-colors duration-200 shadow-[0_0_5px_rgba(255,255,0,0.5)]"
+          className={`w-full bg-yellow-500 text-white py-3 rounded-xl font-semibold hover:bg-yellow-600 transition-colors duration-200 shadow-[0_0_5px_rgba(255,255,0,0.5)] flex justify-center items-center ${
+            isLoading ? "opacity-70 cursor-not-allowed" : ""
+          }`}
+          disabled={isLoading}
         >
-          {isLoading ? <Loader2 className="animate-spin" /> : "Submit Application"}
+          {isLoading ? <Loader2 className="animate-spin w-5 h-5" /> : "Submit Application"}
         </button>
+
       </form>
     </div>
   );
