@@ -94,7 +94,7 @@ const Recruitment = () => {
           We are <span className="text-yellow-400 animate-bounce inline-block drop-shadow-[0_0_1px_rgba(255,255,0,0.7)]">Hiring!</span>
         </h1>
 
-        {["name", "email", "contact",].map((field) => {
+        {["name", "email",].map((field) => {
           const labels = { name: "Full Name", email: "Email Address", contact: "Contact Number" };
           const placeholders = { name: "Enter your full name", email: "Enter your email", contact: "Enter your contact number" };
           const types = { name: "text", email: "email", contact: "tel" };
@@ -112,6 +112,24 @@ const Recruitment = () => {
             </div>
           );
         })}
+
+        <div className="flex flex-col" >
+              <label className="mb-2 text-yellow-300 font-bold text-lg drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Contact</label>
+              <input
+                type="tel"
+                name="contact"
+                placeholder="Enter your contact number"
+                value={formData.contact}
+                onChange={handleChange}
+                pattern="[0-9]{10}"
+                minLength={10}
+                maxLength={10}
+                inputMode="numeric"
+                className="w-full p-3 rounded-xl border border-yellow-500/30 bg-black/30 text-white placeholder-yellow-200 
+                          focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-black/40 transition-colors duration-200 
+                          shadow-[0_0_5px_rgba(255,255,0,0.4)]"
+              />
+            </div>
 
         
 
