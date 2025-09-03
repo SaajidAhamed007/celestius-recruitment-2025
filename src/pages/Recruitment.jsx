@@ -6,9 +6,9 @@ import { db } from "../services/firebase";
 import { Loader2 } from "lucide-react"
 
 const techRoles = ["Frontend Developer", "Backend Developer", "UI/UX Designer"];
-const nonTechRoles = ["Video Editor", "Media", "Content Writer", "Marketing", "Social Media Handling"];
+const nonTechRoles = ["Video Editor", "Media", "Content Writer", "Marketing", "Events & Promotion"];
 const years = ["1st Year", "2nd Year", "3rd Year"];
-const depts = ["CSE","IT","AI DS","AI ML","Cyber Security","CSBS","ECE","MECH","CIVIL","EEE","VLSI","ACT","BME"];
+const depts = ["CSE","IT","AI DS","AI ML","Cyber Security","CSBS","ECE","MECH","CIVIL","EEE","VLSI","ACT","BME","MCT"];
 
 const Recruitment = () => {
   const navigate = useNavigate();
