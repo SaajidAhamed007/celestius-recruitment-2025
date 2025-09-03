@@ -68,7 +68,6 @@ const Recruitment = () => {
           We are <span className="text-yellow-400 animate-bounce inline-block drop-shadow-[0_0_1px_rgba(255,255,0,0.7)]">Hiring!</span>
         </h1>
 
-        {/* Basic Info */}
         {["name", "email", "contact"].map((field) => {
           const labels = { name: "Full Name", email: "Email Address", contact: "Contact Number" };
           const placeholders = { name: "Enter your full name", email: "Enter your email", contact: "Enter your contact number" };
@@ -88,7 +87,6 @@ const Recruitment = () => {
           );
         })}
 
-        {/* Year */}
         <div className="flex flex-col space-y-3">
           <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Year of Study</label>
           <div className="flex gap-4 flex-wrap">
@@ -106,7 +104,6 @@ const Recruitment = () => {
           </div>
         </div>
 
-        {/* Department */}
         <div className="flex flex-col space-y-3">
           <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Department</label>
           <div className="flex gap-4 flex-wrap">
@@ -124,7 +121,6 @@ const Recruitment = () => {
           </div>
         </div>
 
-        {/* Status */}
         <div className="flex flex-col space-y-3">
           <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Status</label>
           <div className="flex gap-4 flex-wrap">
@@ -142,7 +138,6 @@ const Recruitment = () => {
           </div>
         </div>
 
-        {/* Category */}
         <div className="flex flex-col space-y-3">
           <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Category</label>
           <div className="flex gap-4 flex-wrap">
@@ -160,7 +155,6 @@ const Recruitment = () => {
           </div>
         </div>
 
-        {/* Roles (dynamic based on category) */}
         <div className="flex flex-col space-y-3">
           <label className="text-yellow-300 font-bold text-lg mb-2 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">
             {formData.category === "tech" ? "Tech Roles" : "Non-Tech Roles"}
@@ -180,7 +174,6 @@ const Recruitment = () => {
           </div>
         </div>
 
-        {/* GitHub & Resume only for Tech */}
         {showGithubResume && (
           <>
             <div className="flex flex-col">
@@ -208,7 +201,6 @@ const Recruitment = () => {
           </>
         )}
 
-        {/* Description */}
         <div className="flex flex-col">
           <label className="text-yellow-300 mb-2 font-bold text-lg drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Why do you want to join our Tech Club?</label>
           <textarea
