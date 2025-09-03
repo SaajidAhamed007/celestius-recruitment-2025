@@ -223,7 +223,7 @@ const Recruitment = () => {
         {showGithubResume && (
           <>
             <div className="flex flex-col">
-              <label className="mb-2 font-bold text-lg text-yellow-300 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">GitHub Profile</label>
+              <label className="mb-2 font-bold text-lg text-yellow-300 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">GitHub Profile (optional)</label>
               <input
                 type="url"
                 name="github"
@@ -234,7 +234,7 @@ const Recruitment = () => {
               />
             </div>
             <div className="flex flex-col">
-              <label className="mb-2 font-bold text-lg text-yellow-300 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Resume Link</label>
+              <label className="mb-2 font-bold text-lg text-yellow-300 drop-shadow-[0_0_2px_rgba(0,0,0,0.8)]">Resume Link (optional)</label>
               <input
                 type="url"
                 name="resume"
@@ -243,6 +243,7 @@ const Recruitment = () => {
                 onChange={handleChange}
                 className="w-full p-3 rounded-xl border border-yellow-500/30 bg-black/30 text-white placeholder-yellow-200 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:bg-black/40 transition-colors duration-200"
               />
+              <p className="text-yellow-200 text-sm mt-1"><span className="font-bold">Note:</span> Upload your resume in drive and provide the link here.</p>
             </div>
           </>
         )}
